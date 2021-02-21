@@ -47,9 +47,11 @@ app.get('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 });
 
-app.get('/info', (request, response) => {
+app.get('/info', async (request, response) => {
+  const people = await Person.find()
+  console.log('people', people)
   response.send(
-    `<p>Phonebook has info for ${Person.find.length} people<p>
+    `<p>Phonebook has info for ${people.length} people<p>
      <p>${new Date()}<p>`
     );
 })
